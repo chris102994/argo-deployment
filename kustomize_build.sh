@@ -7,7 +7,7 @@ APP_DIR="apps/"
 APP_DIRS=(`find "${APP_DIR}" -maxdepth 1 -mindepth 1 -type d`)
 HELM_LOCATION=$(which helm)
 
-IGNORE_LIST=("argo", "argo-events")
+IGNORE_LIST=("argo-events", "argo-workflows")
 
 for APP in "${APP_DIRS[@]}"; do
   if [[ ! "${IGNORE_LIST[*]}" =~ "${APP//$APP_DIR}" ]]; then

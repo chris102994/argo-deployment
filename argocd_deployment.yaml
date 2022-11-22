@@ -11034,8 +11034,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argo-workflows
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    path: apps/argo-workflows
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
   syncPolicy:
     automated:
@@ -11053,7 +11053,7 @@ spec:
   project: default
   source:
     path: apps/argocd
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
   syncPolicy:
     automated:
@@ -11070,8 +11070,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argo-events
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    path: apps/argo-events
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
   syncPolicy:
     automated:

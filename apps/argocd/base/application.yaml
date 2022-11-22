@@ -6,7 +6,7 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
     path: apps/argocd
 
@@ -27,9 +27,9 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
-    path: argo-events
+    path: apps/argo-events
 
   destination:
     server: https://kubernetes.default.svc
@@ -48,9 +48,9 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:chris102994/argo-deployment.git
+    repoURL: https://github.com/chris102994/argo-deployment.git
     targetRevision: master
-    path: argo-workflows
+    path: apps/argo-workflows
 
   destination:
     server: https://kubernetes.default.svc
