@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:chris102994/argo-deployment.git
+    targetRevision: master
+    path: apps/argocd
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-events
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:chris102994/argo-deployment.git
+    targetRevision: master
+    path: argo-events
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-events
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-workflows
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:chris102994/argo-deployment.git
+    targetRevision: master
+    path: argo-workflows
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
