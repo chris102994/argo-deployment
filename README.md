@@ -26,6 +26,12 @@ View argo-server spec info:
 kubectl -n argo get deployments argo-server -o 'jsonpath={.spec.template.spec.containers[0].args}' | jq
 ```
 
+Manual argocd-repo-server patch:
+```shell
+kubectl patch deployment argocd-repo-server --namespace argocd --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/securityContext/seccompProfile/type", "value": "Unconfined"}]'
+kubectl -n argocd get deployments argocd-repo-server -o 'jsonpath={.spec.template.spec.containers[0].securityContext.seccompProfile.type}'
+```
+
 ```shell
 cd base/
 kubectl kustomize . -o deployment.yaml

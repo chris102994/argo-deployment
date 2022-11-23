@@ -6,6 +6,8 @@ resources:
   - base/namespace.yaml
   - base/ingress.yaml
   - base/application.yaml
+patchesStrategicMerge:
+  - base/patch-argocd-repo-server.yaml
 configMapGenerator:
   - name: argocd-cmd-params-cm
     behavior: replace
