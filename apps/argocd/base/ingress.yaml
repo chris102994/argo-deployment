@@ -11,9 +11,9 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
     # Auth
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth # Secret Name
-    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required :)'
+    # nginx.ingress.kubernetes.io/auth-type: basic
+    # nginx.ingress.kubernetes.io/auth-secret: basic-auth # Secret Name
+    # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required :)'
 spec:
   rules:
   - http:
@@ -25,8 +25,8 @@ spec:
             name: argocd-server
             port:
               name: http
-    host: chriserver.laptop
+    host: acme.com
   tls:
     - hosts:
-        - chriserver.laptop
+        - acme.com
       secretName: argocd-secret # do not change, this is provided by Argo CD

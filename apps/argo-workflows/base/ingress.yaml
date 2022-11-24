@@ -11,9 +11,9 @@ metadata:
     alb.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     # Auth
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth # Secret Name
-    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required :)'
+    # nginx.ingress.kubernetes.io/auth-type: basic
+    # nginx.ingress.kubernetes.io/auth-secret: basic-auth # Secret Name
+    # nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required :)'
 spec:
   rules:
   - http:
@@ -25,7 +25,7 @@ spec:
             name: argo-server
             port:
               number: 2746
-    host: chriserver.laptop
+    host: acme.com
   tls:
     - hosts:
-        - chriserver.laptop
+        - acme.com
