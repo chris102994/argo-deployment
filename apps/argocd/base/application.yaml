@@ -43,6 +43,27 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: argocd-rollouts
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+    path: apps/argo-rollouts
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-rollouts
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
   name: argo-workflows
 spec:
   project: default
@@ -55,6 +76,48 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: argo
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb-load-balancer
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+    path: apps/metallb-load-balancer
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb-system
+
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+    path: apps/nginx-ingress
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
 
   # Sync policy
   syncPolicy:

@@ -9960,6 +9960,7 @@ spec:
     targetPort: 8080
   selector:
     app.kubernetes.io/name: argocd-server
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
@@ -11077,12 +11078,65 @@ spec:
     automated:
       prune: false
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-rollouts
+  namespace: argocd
+spec:
+  destination:
+    namespace: argo-rollouts
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps/argo-rollouts
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb-load-balancer
+  namespace: argocd
+spec:
+  destination:
+    namespace: metallb-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps/metallb-load-balancer
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: false
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+spec:
+  destination:
+    namespace: ingress-nginx
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps/nginx-ingress
+    repoURL: https://github.com/chris102994/argo-deployment.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: false
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     alb.ingress.kubernetes.io/ssl-passthrough: "true"
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -11090,9 +11144,9 @@ metadata:
   name: argocd-ingress
   namespace: argocd
 spec:
+  ingressClassName: nginx
   rules:
-  - host: acme.com
-    http:
+  - http:
       paths:
       - backend:
           service:
@@ -11101,10 +11155,6 @@ spec:
               name: http
         path: /argocd(/|$)(.*)
         pathType: Prefix
-  tls:
-  - hosts:
-    - acme.com
-    secretName: argocd-secret
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
