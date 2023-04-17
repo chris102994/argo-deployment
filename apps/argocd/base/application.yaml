@@ -14,10 +14,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -35,10 +41,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argo-events
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -56,10 +68,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argo-rollouts
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -77,10 +95,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argo
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -98,10 +122,17 @@ spec:
     server: https://kubernetes.default.svc
     namespace: metallb-system
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -119,7 +150,13 @@ spec:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
 
-  # Sync policy
   syncPolicy:
     automated:
-      prune: false
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
